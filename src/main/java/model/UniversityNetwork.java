@@ -32,6 +32,13 @@ public class UniversityNetwork extends Subject {
         }
     }
 
+    public String getStatistics() {
+        int totalPeople = network.numVertices();
+        int totalConnections = network.numEdges();
+        return "Total People: " + totalPeople + "\nTotal Connections: " + totalConnections;
+    }
+
+
     public void addClassRelationship(String description, int idTeacher, int idStudent) throws UniversityNetworkException {
         try {
             Vertex<Person> p1 = findPerson(idTeacher);

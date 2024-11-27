@@ -1,5 +1,6 @@
 package controller;
 
+import model.Person;
 import model.UniversityNetwork;
 import model.UniversityNetworkException;
 import view.UniversityNetworkUI;
@@ -24,8 +25,28 @@ public class UniversityNetworkController {
     }
 
     public void doAddPerson() {
-        /* TODO */
+        try {
+            String name = view.getNamePersonAdd();
+            String role = view.getRolePersonAdd();
+            String id = view.getIdPersonAdd();
+
+            if (name.isEmpty() || role.isEmpty() || id.isEmpty()) {
+                view.displayError("All fields must be filled.");
+                return;
+            }
+
+            Person.PersonRole personRole = Person.PersonRole.valueOf(role.toUpperCase());
+            int personId = Integer.parseInt(id);
+
+            model.addPerson(new Person(personId, name, personRole));
+            view.clearError();
+            view.clearControls();
+
+        } catch (Exception e) {
+            view.displayError("Error adding person: " + e.getMessage());
+        }
     }
+
 
     public void doAddClassRelationShip() {
         try {

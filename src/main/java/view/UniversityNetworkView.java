@@ -62,8 +62,12 @@ public class UniversityNetworkView extends BorderPane implements UniversityNetwo
                 cbPersonId1.getItems().add( String.valueOf(p.getId()) );
                 cbPersonId2.getItems().add( String.valueOf(p.getId()) );
             }
+            if (subject == model) {
+                graphPanel.update();
 
-            /* TODO Statistics */
+                lblPeopleCount.setText(String.valueOf(model.getPeople().size()));
+                lblMostPopular.setText(model.getMostPopular() != null ? model.getMostPopular().toString() : "None");
+            }
         }
     }
 
@@ -142,7 +146,10 @@ public class UniversityNetworkView extends BorderPane implements UniversityNetwo
 
     @Override
     public void clearControls() {
-        //TODO 1;
+        txtPersonId.clear();
+        txtPersonName.clear();
+        cbRoles.getSelectionModel().clearSelection();
+        txtRelationshipDescription.clear();
     }
 
     private void createLayout() {
